@@ -12,6 +12,8 @@ struct LeylApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .tint(Color(hex: "#ff0436"))
+                .preferredColorScheme(.dark)
         }
     }
 }
