@@ -10,7 +10,6 @@ import SwiftUI
 struct MainTabView: View {
     
     @State private var selectedTab = 0
-    @State private var searchText = ""
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -37,7 +36,6 @@ struct MainTabView: View {
                 }
             }
         }
-        .searchable(text: $searchText, placement: .toolbar)
         .tabBarMinimizeBehavior(.onScrollDown)
         .tabViewBottomAccessory {
             MusicPlaybackView()

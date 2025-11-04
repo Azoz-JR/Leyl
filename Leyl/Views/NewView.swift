@@ -12,6 +12,7 @@ struct NewView: View {
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     @State private var scrollOffset: CGFloat = 0
     @State private var hideHeader: Bool = false
+    @State private var hideImage: Bool = false
     
     let mockNewReleases = ["New Album 1", "New Album 2", "New Album 3", "New Album 4", "New Album 5"]
     let mockFeatured = ["Featured Artist 1", "Featured Artist 2", "Featured Artist 3"]
@@ -27,13 +28,7 @@ struct NewView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                GeometryReader { geo in
-                    Color.clear
-                        .preference(key: ScrollOffsetPreferenceKey.self, value: geo.frame(in: .global).minY)
-                }
-                .frame(height: 0)
-                
-                Group {
+                VStack(alignment: .leading, spacing: 24) {
                     sectionView(title: "New Releases", items: mockNewReleases)
                     
                     sectionView(title: "Featured", items: mockFeatured)
@@ -55,38 +50,51 @@ struct NewView: View {
                     sectionView(title: "Editor's Picks", items: mockEditorsPicks)
                 }
                 .padding(.horizontal)
+                .padding(.top, 62)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                scrollOffset = value
+            .onScrollGeometryChange(for: Double.self) { geo in
+                geo.contentOffset.y
+            } action: { _, newValue in
+                scrollOffset = newValue
                 withAnimation(.easeInOut) {
-                    hideHeader = scrollOffset < (safeAreaInsets.top + 30)
+                    hideHeader = scrollOffset > -(safeAreaInsets.top - 10)
+                    hideImage = scrollOffset > -(safeAreaInsets.top - 20)
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+            .overlay(alignment: .top) {
+                Color.black.opacity(0.9).blur(radius: 40)
+                    .frame(height: safeAreaInsets.top + safeAreaInsets.top)
+                    .frame(width: 1000)
+                    .offset(y: -safeAreaInsets.top)
+                    .ignoresSafeArea()
+            }
+            .overlay(alignment: .top) {
+                HStack {
                     Text("New")
-                        .font(.system(size: 24).bold())
-                        .frame(width: 100, alignment: .leading)
+                        .font(.system(size: 32, weight: .bold))
                         .opacity(hideHeader ? 0 : 1)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        print("Profile button tapped")
+                    }) {
+                        Image("profile")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 44, height: 44)
+                            .clipShape(Circle())
+                    }
+                    .opacity(hideImage ? 0 : 1)
                 }
-                .sharedBackgroundVisibility(.hidden)
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    Image("profile")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 38, height: 38)
-                        .clipShape(Circle())
-                        .opacity(hideHeader ? 0 : 1)
-                }
-                .sharedBackgroundVisibility(.hidden)
+                .padding(.horizontal)
             }
         }
     }
     
     private func sectionView(title: String, items: [String]) -> some View {
-        Group {
+        VStack(alignment: .leading, spacing: 12) {
             Text(title)
                 .font(.system(size: 20).bold())
                 .foregroundColor(.primary)
@@ -112,3 +120,4 @@ struct NewView: View {
     NewView()
         .readSafeAreaInsets()
 }
+
