@@ -8,21 +8,27 @@
 import SwiftUI
 
 struct MusicPlaybackView: View {
+    
+    let namespace: Namespace.ID
+    @Binding var showSongView: Bool
+    
+    @Environment(AudioPlayerManager.self) var audioPlayerManager
     @Environment(\.tabViewBottomAccessoryPlacement) var placement
+    
     var body: some View {
         switch placement {
         case .expanded:
             HStack(spacing: 10) {
-                Image("leh")
+                Image(audioPlayerManager.currentSong?.image ?? "aqareeb")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 28, height: 28)
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Song name")
+                    Text(audioPlayerManager.currentSong?.title ?? "Song name")
                         .font(.system(size: 12))
-                    Text("Artist name")
+                    Text(audioPlayerManager.currentSong?.artist ?? "Artist name")
                         .font(.system(size: 12))
                         .foregroundStyle(.secondary)
                 }
@@ -31,9 +37,9 @@ struct MusicPlaybackView: View {
                 
                 HStack(spacing: 20) {
                     Button {
-                        
+                        audioPlayerManager.playPause()
                     } label: {
-                        Image(systemName: "play.fill")
+                        Image(systemName: audioPlayerManager.isPlaying ? "pause.fill" : "play.fill")
                             .font(.system(size: 16))
                             .foregroundStyle(.white)
                     }
@@ -51,18 +57,22 @@ struct MusicPlaybackView: View {
             }
             .padding(.leading, 20)
             .padding(.trailing, 25)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                showSongView = true
+            }
         default:
             HStack(spacing: 15) {
-                Image("leh")
+                Image(audioPlayerManager.currentSong?.image ?? "aqareeb")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 24, height: 24)
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Song name")
+                    Text(audioPlayerManager.currentSong?.title ?? "Song name")
                         .font(.system(size: 12))
-                    Text("Artist name")
+                    Text(audioPlayerManager.currentSong?.artist ?? "Artist name")
                         .font(.system(size: 12))
                         .foregroundStyle(.secondary)
                 }
@@ -70,19 +80,27 @@ struct MusicPlaybackView: View {
                 Spacer()
                 
                 Button {
-                    
+                    audioPlayerManager.playPause()
                 } label: {
-                    Image(systemName: "play.fill")
+                    Image(systemName: audioPlayerManager.isPlaying ? "pause.fill" : "play.fill")
                         .font(.system(size: 16))
                 }
                 .buttonStyle(.plain)
             }
             .padding(.leading, 20)
             .padding(.trailing, 25)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                showSongView = true
+            }
         }
     }
 }
 
 #Preview {
-    MusicPlaybackView()
+    @Previewable @Namespace var namespace
+    @Previewable @State var showSongView = false
+    
+    MusicPlaybackView(namespace: namespace, showSongView: $showSongView)
+        .environment(AudioPlayerManager())
 }

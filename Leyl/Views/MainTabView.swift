@@ -9,36 +9,47 @@ import SwiftUI
 
 struct MainTabView: View {
     
+    @Environment(AudioPlayerManager.self) var audioPlayerManager
     @State private var selectedTab = 0
+    @State private var showSongView = false
+    @Namespace private var animation
     
     var body: some View {
-        TabView(selection: $selectedTab) {
-            Tab("Home", image: selectedTab == 0 ? "homeHighlight" : "home", value: 0) {
-                HomeView()
-            }
-            
-            
-            Tab("New", systemImage: "square.grid.2x2.fill", value: 1) {
-                NewView()
-            }
-            
-            Tab("Radio", systemImage: "dot.radiowaves.left.and.right", value: 2) {
-                RadioView()
-            }
-            
-            Tab("Library", systemImage: "music.note.square.stack.fill", value: 3) {
-                LibraryView()
-            }
-            
-            Tab(value: 4, role: .search) {
-                NavigationStack {
-                    SearchView()
+        ZStack {
+            TabView(selection: $selectedTab) {
+                Tab("Home", image: selectedTab == 0 ? "homeHighlight" : "home", value: 0) {
+                    HomeView()
+                }
+                
+                
+                Tab("New", systemImage: "square.grid.2x2.fill", value: 1) {
+                    NewView()
+                }
+                
+                Tab("Radio", systemImage: "dot.radiowaves.left.and.right", value: 2) {
+                    RadioView()
+                }
+                
+                Tab("Library", systemImage: "music.note.square.stack.fill", value: 3) {
+                    LibraryView()
+                }
+                
+                Tab(value: 4, role: .search) {
+                    NavigationStack {
+                        SearchView()
+                    }
                 }
             }
-        }
-        .tabBarMinimizeBehavior(.onScrollDown)
-        .tabViewBottomAccessory {
-            MusicPlaybackView()
+            .tabBarMinimizeBehavior(.onScrollDown)
+            .tabViewBottomAccessory {
+                if audioPlayerManager.currentSong != nil && !showSongView {
+                    MusicPlaybackView(namespace: animation, showSongView: $showSongView)
+                        .matchedGeometryEffect(id: "songImage", in: animation)
+                }
+            }
+            
+            SongView(namespace: animation, showSongView: $showSongView)
+                .zIndex(1)
         }
     }
 }
@@ -47,4 +58,5 @@ struct MainTabView: View {
     MainTabView()
         .tint(Color(hex: "#ff0436"))
         .preferredColorScheme(.dark)
+        .environment(AudioPlayerManager())
 }

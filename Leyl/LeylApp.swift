@@ -9,11 +9,15 @@ import SwiftUI
 
 @main
 struct LeylApp: App {
+    
+    @State private var audioPlayerManager = AudioPlayerManager()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .tint(Color(hex: "#ff0436"))
                 .preferredColorScheme(.dark)
+                .environment(audioPlayerManager)
         }
     }
 }
