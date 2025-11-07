@@ -10,7 +10,6 @@ import SwiftUI
 struct SongPlayerView: View {
     
     @Environment(AudioPlayerManager.self) var audioPlayerManager
-    @State private var isEditingSlider = false
     
     var body: some View {
         @Bindable var playerManager = audioPlayerManager
@@ -20,9 +19,10 @@ struct SongPlayerView: View {
                 value: $playerManager.currentSongTime,
                 in: 0...audioPlayerManager.currentSongDuration
             ) { editing in
-                isEditingSlider = editing
-                if !editing {
-                    audioPlayerManager.seek(to: playerManager.currentSongTime)
+                if editing {
+                    audioPlayerManager.beginScrubbing()
+                } else {
+                    audioPlayerManager.completeScrubbing(at: playerManager.currentSongTime)
                 }
             }
             .tint(.white.opacity(0.5))

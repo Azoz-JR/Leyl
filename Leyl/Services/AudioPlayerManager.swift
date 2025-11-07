@@ -10,7 +10,7 @@ import Observation
 import SwiftUI
 
 @Observable
-class AudioPlayerManager {    
+class AudioPlayerManager {
     @ObservationIgnored
     private var player: AVPlayer?
     
@@ -19,11 +19,15 @@ class AudioPlayerManager {
     var currentSong: Song?
     
     var isPlaying = false
+    var isEditing = false
     var currentSongTime: Double = 0.0
     var currentSongDuration: Double = 0.0
 
     @ObservationIgnored
     private var timeObserverToken: Any?
+    
+    @ObservationIgnored
+    private var activeScrubToken: UUID?
     
     @ObservationIgnored
     private var endTimeObserver: NSObjectProtocol?
@@ -90,7 +94,9 @@ class AudioPlayerManager {
         timeObserverToken = player?.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
             guard let self = self else { return }
             
-            self.currentSongTime = time.seconds
+            if !self.isEditing {
+                self.currentSongTime = time.seconds
+            }
             
             if let duration = self.player?.currentItem?.duration.seconds, duration.isFinite {
                 self.currentSongDuration = duration
@@ -153,7 +159,7 @@ class AudioPlayerManager {
         currentSongIndex = (currentSongIndex + 1) % songs.count
         let nextSong = songs[currentSongIndex]
         
-        let wasPlaying = isPlaying
+//        let wasPlaying = isPlaying
         setupPlayer(for: nextSong)
         
 //        if wasPlaying {
@@ -170,7 +176,7 @@ class AudioPlayerManager {
             currentSongIndex = (currentSongIndex - 1 + songs.count) % songs.count
             let previousSong = songs[currentSongIndex]
             
-            let wasPlaying = isPlaying
+//            let wasPlaying = isPlaying
             setupPlayer(for: previousSong)
             
 //            if wasPlaying {
@@ -180,9 +186,40 @@ class AudioPlayerManager {
         }
     }
     
+    func beginScrubbing() {
+        isEditing = true
+        activeScrubToken = nil
+    }
+    
+    func completeScrubbing(at time: Double) {
+        currentSongTime = time
+        guard let player else {
+            isEditing = false
+            activeScrubToken = nil
+            return
+        }
+        let targetTime = CMTime(seconds: time, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        let token = UUID()
+        activeScrubToken = token
+        player.seek(to: targetTime, toleranceBefore: .zero, toleranceAfter: .zero) { [weak self] finished in
+            guard finished else { return }
+            DispatchQueue.main.async { [weak self] in
+                guard let self, self.activeScrubToken == token else { return }
+                self.currentSongTime = time
+                self.isEditing = false
+                self.activeScrubToken = nil
+            }
+        }
+    }
+    
     func seek(to time: Double) {
+        guard let player else {
+            currentSongTime = time
+            return
+        }
+        activeScrubToken = nil
         let cmTime = CMTime(seconds: time, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
-        player?.seek(to: cmTime)
+        player.seek(to: cmTime, toleranceBefore: .zero, toleranceAfter: .zero)
         currentSongTime = time
     }
     
@@ -193,6 +230,8 @@ class AudioPlayerManager {
         player = nil
         isPlaying = false
         currentSongTime = 0.0
+        isEditing = false
+        activeScrubToken = nil
     }
     
     deinit {
