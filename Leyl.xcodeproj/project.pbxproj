@@ -6,14 +6,75 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		489B85B32EBE14D30098FF21 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489B85B22EBE14D30098FF21 /* WidgetKit.framework */; };
+		489B85B52EBE14D30098FF21 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489B85B42EBE14D30098FF21 /* SwiftUI.framework */; };
+		489B85C62EBE14D50098FF21 /* PlayingSongExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 489B85B02EBE14D30098FF21 /* PlayingSongExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		489B85C42EBE14D50098FF21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 484C0D762EB912CB0039E350 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 489B85AF2EBE14D30098FF21;
+			remoteInfo = PlayingSongExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		489B85C72EBE14D50098FF21 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				489B85C62EBE14D50098FF21 /* PlayingSongExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		484C0D7E2EB912CB0039E350 /* Leyl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Leyl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		489B85B02EBE14D30098FF21 /* PlayingSongExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PlayingSongExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		489B85B22EBE14D30098FF21 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		489B85B42EBE14D30098FF21 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		489B85CA2EBE14D50098FF21 /* Exceptions for "PlayingSong" folder in "PlayingSongExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 489B85AF2EBE14D30098FF21 /* PlayingSongExtension */;
+		};
+		489B85CD2EBE15500098FF21 /* Exceptions for "Leyl" folder in "Leyl" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 484C0D7D2EB912CB0039E350 /* Leyl */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		484C0D802EB912CB0039E350 /* Leyl */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				489B85CD2EBE15500098FF21 /* Exceptions for "Leyl" folder in "Leyl" target */,
+			);
 			path = Leyl;
+			sourceTree = "<group>";
+		};
+		489B85B62EBE14D30098FF21 /* PlayingSong */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				489B85CA2EBE14D50098FF21 /* Exceptions for "PlayingSong" folder in "PlayingSongExtension" target */,
+			);
+			path = PlayingSong;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,6 +87,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		489B85AD2EBE14D30098FF21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				489B85B52EBE14D30098FF21 /* SwiftUI.framework in Frameworks */,
+				489B85B32EBE14D30098FF21 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -33,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				484C0D802EB912CB0039E350 /* Leyl */,
+				489B85B62EBE14D30098FF21 /* PlayingSong */,
+				489B85B12EBE14D30098FF21 /* Frameworks */,
 				484C0D7F2EB912CB0039E350 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,8 +113,18 @@
 			isa = PBXGroup;
 			children = (
 				484C0D7E2EB912CB0039E350 /* Leyl.app */,
+				489B85B02EBE14D30098FF21 /* PlayingSongExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		489B85B12EBE14D30098FF21 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				489B85B22EBE14D30098FF21 /* WidgetKit.framework */,
+				489B85B42EBE14D30098FF21 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,10 +137,12 @@
 				484C0D7A2EB912CB0039E350 /* Sources */,
 				484C0D7B2EB912CB0039E350 /* Frameworks */,
 				484C0D7C2EB912CB0039E350 /* Resources */,
+				489B85C72EBE14D50098FF21 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				489B85C52EBE14D50098FF21 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				484C0D802EB912CB0039E350 /* Leyl */,
@@ -69,6 +153,28 @@
 			productName = Leyl;
 			productReference = 484C0D7E2EB912CB0039E350 /* Leyl.app */;
 			productType = "com.apple.product-type.application";
+		};
+		489B85AF2EBE14D30098FF21 /* PlayingSongExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 489B85CB2EBE14D50098FF21 /* Build configuration list for PBXNativeTarget "PlayingSongExtension" */;
+			buildPhases = (
+				489B85AC2EBE14D30098FF21 /* Sources */,
+				489B85AD2EBE14D30098FF21 /* Frameworks */,
+				489B85AE2EBE14D30098FF21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				489B85B62EBE14D30098FF21 /* PlayingSong */,
+			);
+			name = PlayingSongExtension;
+			packageProductDependencies = (
+			);
+			productName = PlayingSongExtension;
+			productReference = 489B85B02EBE14D30098FF21 /* PlayingSongExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -81,6 +187,9 @@
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					484C0D7D2EB912CB0039E350 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
+					489B85AF2EBE14D30098FF21 = {
 						CreatedOnToolsVersion = 26.0.1;
 					};
 				};
@@ -100,12 +209,20 @@
 			projectRoot = "";
 			targets = (
 				484C0D7D2EB912CB0039E350 /* Leyl */,
+				489B85AF2EBE14D30098FF21 /* PlayingSongExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		484C0D7C2EB912CB0039E350 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		489B85AE2EBE14D30098FF21 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +239,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		489B85AC2EBE14D30098FF21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		489B85C52EBE14D50098FF21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 489B85AF2EBE14D30098FF21 /* PlayingSongExtension */;
+			targetProxy = 489B85C42EBE14D50098FF21 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		484C0D872EB912CC0039E350 /* Debug */ = {
@@ -254,6 +386,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Leyl/Info.plist;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -274,13 +408,14 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 1;
 				XROS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Debug;
@@ -298,6 +433,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Leyl/Info.plist;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -318,14 +455,80 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 1;
 				XROS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		489B85C82EBE14D50098FF21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5H48BX5PSY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PlayingSong/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PlayingSong;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azoz1salah.Leyl.PlayingSong;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		489B85C92EBE14D50098FF21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5H48BX5PSY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PlayingSong/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PlayingSong;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azoz1salah.Leyl.PlayingSong;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -346,6 +549,15 @@
 			buildConfigurations = (
 				484C0D8A2EB912CC0039E350 /* Debug */,
 				484C0D8B2EB912CC0039E350 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		489B85CB2EBE14D50098FF21 /* Build configuration list for PBXNativeTarget "PlayingSongExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				489B85C82EBE14D50098FF21 /* Debug */,
+				489B85C92EBE14D50098FF21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
