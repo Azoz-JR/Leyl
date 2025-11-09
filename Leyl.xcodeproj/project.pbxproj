@@ -44,6 +44,31 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4816DABA2EBFC13D00A29109 /* Exceptions for "PlayingSong" folder in "Leyl" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				PlayingSongLiveActivity.swift,
+				SongLiveActivityView.swift,
+			);
+			target = 484C0D7D2EB912CB0039E350 /* Leyl */;
+		};
+		4816DAC72EBFF24600A29109 /* Exceptions for "Shared" folder in "PlayingSongExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Localizable.xcstrings,
+				PlayingSongAttributes.swift,
+				SongPlaybackIntents.swift,
+			);
+			target = 489B85AF2EBE14D30098FF21 /* PlayingSongExtension */;
+		};
+		4816DAC92EBFF3B000A29109 /* Exceptions for "Leyl" folder in "PlayingSongExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Models/Song.swift,
+				Services/AudioPlayerManager.swift,
+			);
+			target = 489B85AF2EBE14D30098FF21 /* PlayingSongExtension */;
+		};
 		489B85CA2EBE14D50098FF21 /* Exceptions for "PlayingSong" folder in "PlayingSongExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -61,10 +86,19 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		4816DAC12EBFF22A00A29109 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4816DAC72EBFF24600A29109 /* Exceptions for "Shared" folder in "PlayingSongExtension" target */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		484C0D802EB912CB0039E350 /* Leyl */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				489B85CD2EBE15500098FF21 /* Exceptions for "Leyl" folder in "Leyl" target */,
+				4816DAC92EBFF3B000A29109 /* Exceptions for "Leyl" folder in "PlayingSongExtension" target */,
 			);
 			path = Leyl;
 			sourceTree = "<group>";
@@ -72,6 +106,7 @@
 		489B85B62EBE14D30098FF21 /* PlayingSong */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				4816DABA2EBFC13D00A29109 /* Exceptions for "PlayingSong" folder in "Leyl" target */,
 				489B85CA2EBE14D50098FF21 /* Exceptions for "PlayingSong" folder in "PlayingSongExtension" target */,
 			);
 			path = PlayingSong;
@@ -102,6 +137,7 @@
 		484C0D752EB912CB0039E350 = {
 			isa = PBXGroup;
 			children = (
+				4816DAC12EBFF22A00A29109 /* Shared */,
 				484C0D802EB912CB0039E350 /* Leyl */,
 				489B85B62EBE14D30098FF21 /* PlayingSong */,
 				489B85B12EBE14D30098FF21 /* Frameworks */,
@@ -145,6 +181,7 @@
 				489B85C52EBE14D50098FF21 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				4816DAC12EBFF22A00A29109 /* Shared */,
 				484C0D802EB912CB0039E350 /* Leyl */,
 			);
 			name = Leyl;
@@ -315,6 +352,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -370,6 +408,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};
@@ -491,11 +530,15 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -523,11 +566,15 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

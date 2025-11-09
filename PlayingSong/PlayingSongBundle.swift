@@ -11,8 +11,6 @@ import SwiftUI
 @main
 struct PlayingSongBundle: WidgetBundle {
     var body: some Widget {
-        PlayingSong()
-        PlayingSongControl()
         PlayingSongLiveActivity()
     }
 }

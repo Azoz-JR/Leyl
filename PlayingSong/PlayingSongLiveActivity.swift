@@ -9,44 +9,69 @@ import ActivityKit
 import WidgetKit
 import SwiftUI
 
-struct PlayingSongAttributes: ActivityAttributes {
-    public struct ContentState: Codable, Hashable {
-        // Dynamic stateful properties about your activity go here!
-        var emoji: String
-    }
-
-    // Fixed non-changing properties about your activity go here!
-    var name: String
-}
-
 struct PlayingSongLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: PlayingSongAttributes.self) { context in
             // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello \(context.state.emoji)")
+            VStack(spacing: 0) {
+                SongLiveActivityView(
+                    image: context.state.image,
+                    title: context.state.title,
+                    artist: context.state.artist
+                )
+                
+                SongPlaybackView(state: context.state)
+                    .padding(.bottom, 20)
+                    .padding(.horizontal, 20)
             }
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
+//            .glassEffect(.clear.tint(.white), in: .rect(corners: .concentric()))
+//            .activityBackgroundTint(Color.cyan)
+//            .activitySystemActionForegroundColor(Color.black)
 
         } dynamicIsland: { context in
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    VStack(alignment: .leading) {
+                        Image(context.state.image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 50, height: 50, alignment: .topLeading)
+                            .clipShape(.rect(cornerRadius: 12))
+                    }
+                    .padding(.horizontal, 5)
+                    .padding(.top, 5)
                 }
-                DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                
+                DynamicIslandExpandedRegion(.center) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(context.state.title)
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundStyle(.white)
+                        
+                        Text(context.state.artist)
+                            .foregroundStyle(.secondary)
+                            .font(.system(size: 15, weight: .regular))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.emoji)")
-                    // more content
+                    SongPlaybackView(state: context.state)
+//                        .padding(.bottom, 10)
                 }
             } compactLeading: {
-                Text("L")
+                Image(context.state.image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 24, height: 24)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
             } compactTrailing: {
-                Text("T \(context.state.emoji)")
+                Image(systemName: "waveform")
+                    .symbolColorRenderingMode(.gradient)
+                    .symbolEffect(.bounce, options: .repeat(.continuous), isActive: true)
+                    .foregroundStyle(.brown)
             } minimal: {
                 Text(context.state.emoji)
             }
@@ -56,25 +81,9 @@ struct PlayingSongLiveActivity: Widget {
     }
 }
 
-extension PlayingSongAttributes {
-    fileprivate static var preview: PlayingSongAttributes {
-        PlayingSongAttributes(name: "World")
-    }
-}
-
-extension PlayingSongAttributes.ContentState {
-    fileprivate static var smiley: PlayingSongAttributes.ContentState {
-        PlayingSongAttributes.ContentState(emoji: "😀")
-     }
-     
-     fileprivate static var starEyes: PlayingSongAttributes.ContentState {
-         PlayingSongAttributes.ContentState(emoji: "🤩")
-     }
-}
-
 #Preview("Notification", as: .content, using: PlayingSongAttributes.preview) {
    PlayingSongLiveActivity()
 } contentStates: {
     PlayingSongAttributes.ContentState.smiley
-    PlayingSongAttributes.ContentState.starEyes
+//    PlayingSongAttributes.ContentState.starEyes
 }

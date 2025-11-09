@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct LeylApp: App {
     
-    @State private var audioPlayerManager = AudioPlayerManager()
+    @State private var audioPlayerManager = AudioPlayerManager.shared
     
     var body: some Scene {
         WindowGroup {

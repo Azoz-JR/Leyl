@@ -54,7 +54,7 @@ struct SongView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background {
                 LinearGradient(
-                    colors: audioPlayerManager.currentSong?.colors ?? [.black, .black],
+                    colors: audioPlayerManager.currentSong?.colors.map { Color(hex: $0) } ?? [.black, .black],
                     startPoint: gradientShift ? .topTrailing : .topLeading,
                     endPoint: gradientShift ? .bottomLeading : .bottomTrailing
                 )
@@ -96,5 +96,5 @@ struct SongView: View {
     @Previewable @State var showSongView = true
     
     SongView(namespace: namespace, showSongView: $showSongView)
-        .environment(AudioPlayerManager())
+        .environment(AudioPlayerManager.preview())
 }

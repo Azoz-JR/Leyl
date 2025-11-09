@@ -93,5 +93,5 @@ struct SongPlayerView: View {
 
 #Preview {
     SongPlayerView()
-        .environment(AudioPlayerManager())
+        .environment(AudioPlayerManager.preview())
 }

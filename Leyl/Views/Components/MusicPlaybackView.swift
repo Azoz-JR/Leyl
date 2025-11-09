@@ -102,5 +102,5 @@ struct MusicPlaybackView: View {
     @Previewable @State var showSongView = false
     
     MusicPlaybackView(namespace: namespace, showSongView: $showSongView)
-        .environment(AudioPlayerManager())
+        .environment(AudioPlayerManager.preview())
 }

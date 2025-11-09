@@ -58,5 +58,5 @@ struct MainTabView: View {
     MainTabView()
         .tint(Color(hex: "#ff0436"))
         .preferredColorScheme(.dark)
-        .environment(AudioPlayerManager())
+        .environment(AudioPlayerManager.preview())
 }
