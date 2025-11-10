@@ -29,7 +29,7 @@ extension PlayingSongAttributes {
             song: Song(
                 title: "Afterparty",
                 artist: "Wegz",
-                image: "leh",
+                image: "leh-DI",
                 url: URL(string: "www.youtube.com")!,
                 colors: []
             )
@@ -46,7 +46,7 @@ extension PlayingSongAttributes.ContentState {
             isPlaying: true,
             title: "Afterparty",
             artist: "Wegz",
-            image: "leh"
+            image: "aqareeb-DI"
         )
      }
      
@@ -58,7 +58,7 @@ extension PlayingSongAttributes.ContentState {
             isPlaying: false,
             title: "Khesert El Sha3b",
             artist: "Wegz",
-            image: "aqareeb"
+            image: "aqareeb-DI"
          )
      }
 }

@@ -23,6 +23,7 @@ final class AudioPlayerManager {
     private var player: AVPlayer?
     
     var songs: [Song] = []
+    var albums: [Album] = []
     private var currentSongIndex: Int = 0
     var currentSong: Song?
     
@@ -47,7 +48,9 @@ final class AudioPlayerManager {
 
     private init() {
         loadSongs()
+        setupAlbums()
         setupAudioSession()
+        clearLiveActivities()
     }
     
     private func setupAudioSession() {
@@ -63,7 +66,11 @@ final class AudioPlayerManager {
         guard let url1 = Bundle.main.url(forResource: "Wegz - Khesert El Sha3b", withExtension: "mp3"),
               let url2 = Bundle.main.url(forResource: "Wegz - Afterparty", withExtension: "mp3"),
               let url3 = Bundle.main.url(forResource: "Nasser - Leh", withExtension: "mp3"),
-              let url4 = Bundle.main.url(forResource: "Nasser - MEEN FINA", withExtension: "mp3") else {
+              let url4 = Bundle.main.url(forResource: "Nasser - MEEN FINA", withExtension: "mp3"),
+              let url5 = Bundle.main.url(forResource: "Lege-Cy - El Neyya", withExtension: "mp3"),
+              let url6 = Bundle.main.url(forResource: "Lege-Cy - LAW NASYANY", withExtension: "mp3"),
+              let url7 = Bundle.main.url(forResource: "Dua Lipa - Houdini", withExtension: "mp3"),
+              let url8 = Bundle.main.url(forResource: "Dua Lipa - Fever", withExtension: "mp3") else {
             print("Failed to load songs")
             return
         }
@@ -72,11 +79,70 @@ final class AudioPlayerManager {
         let song2 = Song(title: "Afterparty", artist: "Wegz", image: "aqareeb", url: url2, colors: ["#A68563", "#A68563"])
         let song3 = Song(title: "Leh", artist: "Nasser", image: "leh", url: url3, colors: ["#2C3F43", "#7D8987"])
         let song4 = Song(title: "MEEN FINA", artist: "Nasser", image: "leh", url: url4, colors: ["#2C3F43", "#7D8987"])
+        let song5 = Song(title: "El Neyya", artist: "Lege-Cy", image: "lege-cy", url: url5, colors: ["#2C3F43", "#7D8987"])
+        let song6 = Song(title: "LAW NASYANY", artist: "Lege-Cy", image: "lege-cy", url: url6, colors: ["#2C3F43", "#7D8987"])
+        let song7 = Song(title: "Houdini", artist: "Dua Lipa", image: "dua-lipa", url: url7, colors: ["#2C3F43", "#7D8987"])
+        let song8 = Song(title: "Fever", artist: "Dua Lipa", image: "dua-lipa", url: url8, colors: ["#2C3F43", "#7D8987"])
 
-        songs = [song1, song2, song3, song4]
+        songs = [song1, song2, song3, song4, song5, song6, song7, song8]
         
         if !songs.isEmpty {
             currentSong = songs[0]
+        }
+    }
+    
+    private func setupAlbums() {
+        let wegzSongs = songs.filter { $0.artist == "Wegz" }
+        let nasserSongs = songs.filter { $0.artist == "Nasser" }
+        let legeCySongs = songs.filter { $0.artist == "Lege-Cy" }
+        let duaLipaSongs = songs.filter { $0.artist == "Dua Lipa" }
+
+        if !wegzSongs.isEmpty {
+            let wegzAlbum = Album(
+                title: "Aqareeb",
+                artist: "Wegz",
+                imageName: "aqareeb",
+                year: "2024",
+                songs: wegzSongs,
+                colors: ["#A68563", "#A68563"]
+            )
+            albums.append(wegzAlbum)
+        }
+        
+        if !nasserSongs.isEmpty {
+            let nasserAlbum = Album(
+                title: "Leh",
+                artist: "Nasser",
+                imageName: "leh",
+                year: "2024",
+                songs: nasserSongs,
+                colors: ["#2C3F43", "#7D8987"]
+            )
+            albums.append(nasserAlbum)
+        }
+
+        if !legeCySongs.isEmpty {
+            let legeCyAlbum = Album(
+                title: "Swissra",
+                artist: "Lege-Cy",
+                imageName: "lege-cy",
+                year: "2024",
+                songs: legeCySongs,
+                colors: ["#2C3F43", "#7D8987"]
+            )
+            albums.append(legeCyAlbum)
+        }
+
+        if !duaLipaSongs.isEmpty {
+            let duaLipaAlbum = Album(
+                title: "Radical Optimism",
+                artist: "Dua Lipa",
+                imageName: "dua-lipa",
+                year: "2023",
+                songs: duaLipaSongs,
+                colors: ["#2C3F43", "#7D8987"]
+            )
+            albums.append(duaLipaAlbum)
         }
     }
     
@@ -141,6 +207,22 @@ final class AudioPlayerManager {
     
     private func handleSongFinished() {
         nextTrack()
+    }
+    
+    func playSong(_ song: Song) {
+        if let index = songs.firstIndex(where: { $0.id == song.id }) {
+            currentSongIndex = index
+        }
+        
+        setupPlayer(for: song)
+        player?.play()
+        isPlaying = true
+        
+        if currentPlayingSongActivity == nil {
+            startPlayingSongActivity()
+        } else {
+            updateLiveActivityIfNeeded(force: true)
+        }
     }
     
     func playPause() {
@@ -269,7 +351,7 @@ final class AudioPlayerManager {
         guard let currentSong else { return }
         
         let attributes = PlayingSongAttributes(song: currentSong)
-        let content = ActivityContent(state: makeContentState(), staleDate: nil)
+        let content = ActivityContent(state: makeContentState(), staleDate: Date.now.addingTimeInterval(1.0))
         
         do {
             let activity = try Activity<PlayingSongAttributes>.request(attributes: attributes, content: content, pushType: nil)
@@ -281,11 +363,14 @@ final class AudioPlayerManager {
     }
     
     func endPlayingSongActivity() {
+        print("endPlayingSongActivity: \(currentPlayingSongActivity)")
         guard let currentPlayingSongActivity else { return }
-        let finalContent = ActivityContent(state: makeContentState(), staleDate: nil)
+        let finalContent = ActivityContent(state: makeContentState(), staleDate: Date.now.addingTimeInterval(1.0))
         
         Task {
+            print("endPlayingSongActivity will start")
             await currentPlayingSongActivity.end(finalContent, dismissalPolicy: .immediate)
+            print("endPlayingSongActivity done")
             self.currentPlayingSongActivity = nil
             self.lastActivityUpdateDate = nil
         }
@@ -314,7 +399,7 @@ final class AudioPlayerManager {
             isPlaying: isPlaying,
             title: song?.title ?? "",
             artist: song?.artist ?? "",
-            image: song?.image ?? "leh"
+            image: (song?.image ?? "leh").appending("-DI")
         )
     }
     
@@ -336,8 +421,31 @@ final class AudioPlayerManager {
         let state = makeContentState()
         
         Task {
-            await activity.update(ActivityContent(state: state, staleDate: nil))
+            await activity.update(ActivityContent(state: state, staleDate: Date.now.addingTimeInterval(1.0)))
         }
+    }
+    
+    func clearLiveActivities() {
+        Task {
+            for activity in Activity<PlayingSongAttributes>.activities {
+                await activity.end(nil, dismissalPolicy: .immediate)
+            }
+        }
+    }
+    
+    func endAllLiveActivities()  {
+        print("Ending Live Activities")
+        let semaphore = DispatchSemaphore(value: 0)
+        Task
+        {
+            for activity in Activity<PlayingSongAttributes>.activities
+            {
+                print("Ending Live Activity: \(activity.id)")
+                await activity.end(nil, dismissalPolicy: .immediate)
+            }
+            semaphore.signal()
+        }
+        semaphore.wait()
     }
     
     @MainActor deinit {

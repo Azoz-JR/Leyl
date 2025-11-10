@@ -64,6 +64,8 @@
 		4816DAC92EBFF3B000A29109 /* Exceptions for "Leyl" folder in "PlayingSongExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Assets.xcassets,
+				Models/Album.swift,
 				Models/Song.swift,
 				Services/AudioPlayerManager.swift,
 			);

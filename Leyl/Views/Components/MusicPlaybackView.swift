@@ -28,9 +28,11 @@ struct MusicPlaybackView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(audioPlayerManager.currentSong?.title ?? "Song name")
                         .font(.system(size: 12))
+                        .lineLimit(1)
                     Text(audioPlayerManager.currentSong?.artist ?? "Artist name")
                         .font(.system(size: 12))
                         .foregroundStyle(.secondary)
+                        .lineLimit(1)
                 }
                 
                 Spacer()
@@ -46,7 +48,7 @@ struct MusicPlaybackView: View {
                     .buttonStyle(.plain)
 
                     Button {
-                        
+                        audioPlayerManager.nextTrack()
                     } label: {
                         Image(systemName: "forward.fill")
                             .font(.system(size: 16))
@@ -72,9 +74,11 @@ struct MusicPlaybackView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(audioPlayerManager.currentSong?.title ?? "Song name")
                         .font(.system(size: 12))
+                        .lineLimit(1)
                     Text(audioPlayerManager.currentSong?.artist ?? "Artist name")
                         .font(.system(size: 12))
                         .foregroundStyle(.secondary)
+                        .lineLimit(1)
                 }
                 
                 Spacer()

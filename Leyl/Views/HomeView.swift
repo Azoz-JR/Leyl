@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @Environment(\.safeAreaInsets) private var safeAreaInsets
+    @Environment(AudioPlayerManager.self) var audioPlayerManager
     @State private var scrollOffset: CGFloat = 0
     @State private var hideHeader: Bool = false
     @State private var hideImage: Bool = false
@@ -93,68 +94,114 @@ struct HomeView: View {
     }
     
     private func loadTopPicks() {
-        topPicks = [
-            TopPickItem(
-                category: "Made for you",
-                imageName: "leh",
-                type: .station(name: "Azoz Salah's Station")
-            ),
-            TopPickItem(
+        let albums = audioPlayerManager.albums
+        
+        var picks: [TopPickItem] = []
+        
+//        if !albums.isEmpty {
+//            picks.append(TopPickItem(
+//                category: "Made for you",
+//                imageName: albums[0].imageName,
+//                type: .station(name: "Your Station")
+//            ))
+//        }
+        
+        for album in albums {
+            picks.append(TopPickItem(
                 category: "New Release",
-                imageName: "leh",
-                type: .album(name: "After Hours", artist: "The Weeknd", year: "2020")
-            ),
-            TopPickItem(
+                imageName: album.imageName,
+                type: .album(name: album.title, artist: album.artist, year: album.year)
+            ))
+        }
+        
+        if !albums.isEmpty {
+            picks.append(TopPickItem(
                 category: "Listen again",
-                imageName: "leh",
-                type: .album(name: "Midnights", artist: "Taylor Swift", year: "2022")
-            ),
-            TopPickItem(
-                category: "More from Nasser",
-                imageName: "leh",
-                type: .album(name: "Certified Lover Boy", artist: "Drake", year: "2021")
-            ),
-            TopPickItem(
-                category: "Mood for you",
-                imageName: "leh",
-                type: .station(name: "Chill Vibes Radio")
-            )
-        ]
+                imageName: albums[0].imageName,
+                type: .album(name: albums[0].title, artist: albums[0].artist, year: albums[0].year)
+            ))
+        }
+        
+        topPicks = picks
     }
     
     private func loadSections() {
+        let albums = audioPlayerManager.albums
+        
+        let recentlyPlayedItems = albums.map { album in
+            SectionItem(
+                imageName: album.imageName,
+                title: album.title,
+                subtitle: album.artist,
+                album: album
+            )
+        }
+        
+        let newReleasesItems = albums.map { album in
+            SectionItem(
+                imageName: album.imageName,
+                title: album.title,
+                subtitle: album.artist,
+                album: album
+            )
+        }
+        
+        let popularAlbumsItems = albums.map { album in
+            SectionItem(
+                imageName: album.imageName,
+                title: album.title,
+                subtitle: album.artist,
+                album: album
+            )
+        }
+        
+        let trendingNowItems = albums.map { album in
+            SectionItem(
+                imageName: album.imageName,
+                title: album.title,
+                subtitle: album.artist,
+                album: album
+            )
+        }
+        
+        let discoverMoreItems = albums.map { album in
+            SectionItem(
+                imageName: album.imageName,
+                title: album.title,
+                subtitle: album.artist,
+                album: album
+            )
+        }
+        
         sections = [
             Section(
                 title: "Recently Played",
                 type: .simple,
-                items: [
-                    SectionItem(imageName: "leh", title: "Playlist 1", subtitle: "Artist Name"),
-                    SectionItem(imageName: "leh", title: "Playlist 2", subtitle: "Artist Name"),
-                    SectionItem(imageName: "leh", title: "Playlist 3", subtitle: "Artist Name"),
-                    SectionItem(imageName: "leh", title: "Playlist 4", subtitle: "Artist Name")
-                ]
+                items: recentlyPlayedItems
             ),
             Section(
-                title: "Made for You",
+                title: "New Releases",
                 type: .tappable(destination: {
-                    AnyView(Text("Made for You Detail"))
+                    AnyView(Text("New Releases Detail"))
                 }),
-                items: [
-                    SectionItem(imageName: "leh", title: "Album 1", subtitle: "Artist Name"),
-                    SectionItem(imageName: "leh", title: "Album 2", subtitle: "Artist Name"),
-                    SectionItem(imageName: "leh", title: "Album 3", subtitle: "Artist Name")
-                ]
+                items: newReleasesItems
             ),
             Section(
                 title: "Popular Albums",
                 type: .simple,
-                items: [
-                    SectionItem(imageName: "leh", title: "Album A", subtitle: "Artist Name"),
-                    SectionItem(imageName: "leh", title: "Album B", subtitle: "Artist Name"),
-                    SectionItem(imageName: "leh", title: "Album C", subtitle: "Artist Name"),
-                    SectionItem(imageName: "leh", title: "Album D", subtitle: "Artist Name"),
-                    SectionItem(imageName: "leh", title: "Album E", subtitle: "Artist Name")
-                ]
+                items: popularAlbumsItems
+            ),
+            Section(
+                title: "Trending Now",
+                type: .simple,
+                items: trendingNowItems
+            ),
+            Section(
+                title: "Discover More",
+                type: .tappable(destination: {
+                    AnyView(Text("Discover More Detail"))
+                }),
+                items: discoverMoreItems
             )
         ]
     }
@@ -162,5 +209,6 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environment(AudioPlayerManager.preview())
         .readSafeAreaInsets()
 }

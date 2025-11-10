@@ -10,6 +10,8 @@ import SwiftUI
 @main
 struct LeylApp: App {
     
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     @State private var audioPlayerManager = AudioPlayerManager.shared
     
     var body: some Scene {
@@ -19,5 +21,13 @@ struct LeylApp: App {
                 .preferredColorScheme(.dark)
                 .environment(audioPlayerManager)
         }
+    }
+}
+
+
+final class AppDelegate: NSObject, UIApplicationDelegate {
+    func applicationWillTerminate(_ application: UIApplication) {
+        print("Application will Terminate")
+//        AudioPlayerManager.shared.endAllLiveActivities()
     }
 }

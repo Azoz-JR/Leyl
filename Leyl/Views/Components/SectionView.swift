@@ -30,8 +30,13 @@ struct SectionView: View {
                 HStack(spacing: 16) {
                     ForEach(section.items) { item in
                         NavigationLink {
-                            SongDetailView()
-                                .navigationTransition(.zoom(sourceID: "section(\(section.id))song(\(item.id))", in: namespace))
+                            if let album = item.album {
+                                AlbumView(album: album)
+                                    .navigationTransition(.zoom(sourceID: "section(\(section.id))song(\(item.id))", in: namespace))
+                            } else {
+                                SongDetailView()
+                                    .navigationTransition(.zoom(sourceID: "section(\(section.id))song(\(item.id))", in: namespace))
+                            }
                         } label: {
                             SectionItemCard(item: item)
                                 .matchedTransitionSource(id: "section(\(section.id))song(\(item.id))", in: namespace)
