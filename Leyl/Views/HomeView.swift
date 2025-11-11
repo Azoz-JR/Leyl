@@ -98,27 +98,23 @@ struct HomeView: View {
         
         var picks: [TopPickItem] = []
         
-//        if !albums.isEmpty {
-//            picks.append(TopPickItem(
-//                category: "Made for you",
-//                imageName: albums[0].imageName,
-//                type: .station(name: "Your Station")
-//            ))
-//        }
-        
         for album in albums {
-            picks.append(TopPickItem(
-                category: "New Release",
-                imageName: album.imageName,
-                type: .album(name: album.title, artist: album.artist, year: album.year)
-            ))
+            picks.append(
+                TopPickItem(
+                    category: "New Release",
+                    imageName: album.imageName,
+                    type: .album(name: album.title, artist: album.artist, year: album.year, colors: album.colors),
+                    album: album
+                )
+            )
         }
         
         if !albums.isEmpty {
             picks.append(TopPickItem(
                 category: "Listen again",
                 imageName: albums[0].imageName,
-                type: .album(name: albums[0].title, artist: albums[0].artist, year: albums[0].year)
+                type: .album(name: albums[0].title, artist: albums[0].artist, year: albums[0].year, colors: ["#2C3F43", "#7D8987"]),
+                album: albums[0]
             ))
         }
         
@@ -127,13 +123,15 @@ struct HomeView: View {
     
     private func loadSections() {
         let albums = audioPlayerManager.albums
+        let allSongs = audioPlayerManager.songs
         
-        let recentlyPlayedItems = albums.map { album in
+        let randomSongs = allSongs.shuffled().prefix(8)
+        let recentlyPlayedItems = randomSongs.map { song in
             SectionItem(
-                imageName: album.imageName,
-                title: album.title,
-                subtitle: album.artist,
-                album: album
+                imageName: song.image ?? "aqareeb",
+                title: song.title,
+                subtitle: song.artist,
+                song: song
             )
         }
         
@@ -176,33 +174,31 @@ struct HomeView: View {
         sections = [
             Section(
                 title: "Recently Played",
-                type: .simple,
+                type: .tappable(destination: {
+                    AnyView(RecentlyPlayedGridView(songs: Array(randomSongs)))
+                }),
                 items: recentlyPlayedItems
             ),
-            Section(
-                title: "New Releases",
-                type: .tappable(destination: {
-                    AnyView(Text("New Releases Detail"))
-                }),
-                items: newReleasesItems
-            ),
-            Section(
-                title: "Popular Albums",
-                type: .simple,
-                items: popularAlbumsItems
-            ),
-            Section(
-                title: "Trending Now",
-                type: .simple,
-                items: trendingNowItems
-            ),
-            Section(
-                title: "Discover More",
-                type: .tappable(destination: {
-                    AnyView(Text("Discover More Detail"))
-                }),
-                items: discoverMoreItems
-            )
+//            Section(
+//                title: "New Releases",
+//                type: .simple,
+//                items: newReleasesItems
+//            ),
+//            Section(
+//                title: "Popular Albums",
+//                type: .simple,
+//                items: popularAlbumsItems
+//            ),
+//            Section(
+//                title: "Trending Now",
+//                type: .simple,
+//                items: trendingNowItems
+//            ),
+//            Section(
+//                title: "Discover More",
+//                type: .simple,
+//                items: discoverMoreItems
+//            )
         ]
     }
 }

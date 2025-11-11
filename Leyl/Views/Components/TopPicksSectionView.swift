@@ -18,7 +18,11 @@ struct TopPicksSectionView: View {
                 HStack(spacing: 12) {
                     ForEach(items) { item in
                         NavigationLink {
-                            SongDetailView()
+                            if let album = item.album {
+                                AlbumView(album: album)
+                            } else {
+                                SongDetailView()
+                            }
                         } label: {
                             TopPickCard(item: item)
                         }
@@ -44,12 +48,12 @@ struct TopPicksSectionView: View {
                 TopPickItem(
                     category: "New Release",
                     imageName: "leh",
-                    type: .album(name: "After Hours", artist: "The Weeknd", year: "2020")
+                    type: .album(name: "After Hours", artist: "The Weeknd", year: "2020", colors: ["000000", "FFFFFF"])
                 ),
                 TopPickItem(
                     category: "Listen again",
                     imageName: "leh",
-                    type: .album(name: "Midnights", artist: "Taylor Swift", year: "2022")
+                    type: .album(name: "Midnights", artist: "Taylor Swift", year: "2022", colors: ["000000", "FFFFFF"])
                 )
             ])
         }

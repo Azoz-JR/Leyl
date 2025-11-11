@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Song: Codable {
+struct Song: Identifiable, Hashable, Codable {
     let id: UUID
     let title: String
     let artist: String

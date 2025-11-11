@@ -27,27 +27,53 @@ struct SectionView: View {
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    ForEach(section.items) { item in
-                        NavigationLink {
-                            if let album = item.album {
-                                AlbumView(album: album)
-                                    .navigationTransition(.zoom(sourceID: "section(\(section.id))song(\(item.id))", in: namespace))
-                            } else {
-                                SongDetailView()
-                                    .navigationTransition(.zoom(sourceID: "section(\(section.id))song(\(item.id))", in: namespace))
+                LazyHStack(spacing: 16) {
+                    ForEach(section.items.enumerated(), id: \.offset) { index, item in
+                        if let song = item.song {
+                            NavigationLink {
+                                AlbumView(album: createAlbumFromSong(song))
+                                    .navigationTransition(.zoom(sourceID: "section\(index)(\(section.id))item(\(item.id))", in: namespace))
+                            } label: {
+                                SectionItemCard(item: item)
+                                    .matchedTransitionSource(id: "section\(index)(\(section.id))item(\(item.id))", in: namespace)
                             }
-                        } label: {
-                            SectionItemCard(item: item)
-                                .matchedTransitionSource(id: "section(\(section.id))song(\(item.id))", in: namespace)
+                            .buttonStyle(.plain)
+                        } else if let album = item.album {
+                            NavigationLink {
+                                AlbumView(album: album)
+                                    .navigationTransition(.zoom(sourceID: "section\(index)(\(section.id))item(\(item.id))", in: namespace))
+                            } label: {
+                                SectionItemCard(item: item)
+                                    .matchedTransitionSource(id: "section\(index)(\(section.id))item(\(item.id))", in: namespace)
+                            }
+                            .buttonStyle(.plain)
+                        } else {
+                            NavigationLink {
+                                SongDetailView()
+                                    .navigationTransition(.zoom(sourceID: "section\(index)(\(section.id))item(\(item.id))", in: namespace))
+                            } label: {
+                                SectionItemCard(item: item)
+                                    .matchedTransitionSource(id: "section\(index)(\(section.id))item(\(item.id))", in: namespace)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                     }
                 }
                 .padding(.horizontal, 20)
             }
         }
         .padding(.bottom, 24)
+    }
+    
+    private func createAlbumFromSong(_ song: Song) -> Album {
+        Album(
+            title: song.title,
+            artist: song.artist,
+            imageName: song.image ?? "aqareeb",
+            year: "",
+            songs: [song],
+            colors: song.colors
+        )
     }
 }
 

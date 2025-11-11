@@ -9,7 +9,7 @@ import SwiftUI
 
 enum TopPickType {
     case station(name: String)
-    case album(name: String, artist: String, year: String)
+    case album(name: String, artist: String, year: String, colors: [String])
 }
 
 struct TopPickItem: Identifiable {
@@ -17,12 +17,14 @@ struct TopPickItem: Identifiable {
     let category: String
     let imageName: String
     let type: TopPickType
+    let album: Album?
     
-    init(id: UUID = UUID(), category: String, imageName: String, type: TopPickType) {
+    init(id: UUID = UUID(), category: String, imageName: String, type: TopPickType, album: Album? = nil) {
         self.id = id
         self.category = category
         self.imageName = imageName
         self.type = type
+        self.album = album
     }
 }
 

@@ -32,9 +32,11 @@ struct AlbumView: View {
                         .font(.title3)
                         .foregroundStyle(Color.accentColor)
                     
-                    Text(album.year)
-                        .font(.subheadline)
-                        .foregroundStyle(.white.opacity(0.5))
+                    if !album.year.isEmpty {
+                        Text(album.year)
+                            .font(.subheadline)
+                            .foregroundStyle(.white.opacity(0.5))
+                    }
                 }
                 .padding(.top, 20)
                 

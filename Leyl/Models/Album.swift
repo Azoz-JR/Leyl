@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Album: Identifiable {
+struct Album: Identifiable, Hashable {
     let id: UUID
     let title: String
     let artist: String

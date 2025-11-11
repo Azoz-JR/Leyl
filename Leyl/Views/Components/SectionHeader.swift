@@ -19,7 +19,7 @@ struct SectionHeader: View {
                         
             if case .tappable = type {
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.system(size: 16, weight: .bold))
                     .foregroundStyle(.secondary)
             }
         }
