@@ -26,9 +26,15 @@ struct MusicPlaybackView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(audioPlayerManager.currentSong?.title ?? "Song name")
-                        .font(.system(size: 12))
-                        .lineLimit(1)
+//                    ScrollingText(
+//                        text: audioPlayerManager.currentSong?.title ?? "Song name",
+//                        font: .system(size: 14, weight: .semibold),
+//                        availableWidth: 180
+//                    )
+//                    .frame(height: 16)
+                    
+                    MarqueeText(text: audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b", font: .systemFont(ofSize: 14, weight: .semibold), leftFade: 2, rightFade: 15, startDelay: 4, alignment: .leading)
+                    
                     Text(audioPlayerManager.currentSong?.artist ?? "Artist name")
                         .font(.system(size: 12))
                         .foregroundStyle(.secondary)
@@ -64,17 +70,24 @@ struct MusicPlaybackView: View {
                 showSongView = true
             }
         default:
-            HStack(spacing: 15) {
+            HStack(spacing: 0) {
                 Image(audioPlayerManager.currentSong?.image ?? "aqareeb")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 24, height: 24)
                     .clipShape(RoundedRectangle(cornerRadius: 4))
+                    .padding(.trailing, 15)
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(audioPlayerManager.currentSong?.title ?? "Song name")
-                        .font(.system(size: 12))
-                        .lineLimit(1)
+//                    ScrollingText(
+//                        text: audioPlayerManager.currentSong?.title ?? "Song name",
+//                        font: .system(size: 14, weight: .semibold),
+//                        availableWidth: 120
+//                    )
+//                    .frame(height: 16)
+                    
+                    MarqueeText(text: audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b", font: .systemFont(ofSize: 14, weight: .semibold), leftFade: 2, rightFade: 15, startDelay: 4, alignment: .leading)
+                    
                     Text(audioPlayerManager.currentSong?.artist ?? "Artist name")
                         .font(.system(size: 12))
                         .foregroundStyle(.secondary)

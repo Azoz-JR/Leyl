@@ -36,10 +36,17 @@ struct SongView: View {
                     .padding(.top, 30)
                 
                 VStack(spacing: 0) {
-                    Text(audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.white)
+//                    Text(audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b")
+//                    .font(.title2)
+//                    .fontWeight(.bold)
+//                    .foregroundStyle(.white)
+//                    .lineLimit(1)
+//                    .padding(.horizontal, 30)
+                    
+                    MarqueeText(text: audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b", font: .systemFont(ofSize: 21, weight: .bold), leftFade: 2, rightFade: 10, startDelay: 2, alignment: .center)
+                        .padding(.horizontal, 30)
+                        .padding(.bottom, 2)
+                        .id(showSongView)
                     
                     Text(audioPlayerManager.currentSong?.artist ?? "Wegz")
                     .font(.title3)

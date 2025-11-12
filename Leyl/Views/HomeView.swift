@@ -67,25 +67,6 @@ struct HomeView: View {
                 }
                 .padding(.horizontal)
             }
-//            .toolbar {
-//                ToolbarItem(placement: .topBarLeading) {
-//                    Text("Home")
-//                        .font(.system(size: 32).bold())
-//                        .frame(width: 100, alignment: .leading)
-//                        .opacity(hideHeader ? 0 : 1)
-//                }
-//                .sharedBackgroundVisibility(.hidden)
-//                
-//                ToolbarItem(placement: .topBarTrailing) {
-//                    Image("profile")
-//                        .resizable()
-//                        .scaledToFill()
-//                        .frame(width: 44, height: 44)
-//                        .clipShape(Circle())
-//                        .opacity(hideHeader ? 0 : 1)
-//                }
-//                .sharedBackgroundVisibility(.hidden)
-//            }
         }
         .task {
             loadSections()
@@ -179,26 +160,26 @@ struct HomeView: View {
                 }),
                 items: recentlyPlayedItems
             ),
-//            Section(
-//                title: "New Releases",
-//                type: .simple,
-//                items: newReleasesItems
-//            ),
-//            Section(
-//                title: "Popular Albums",
-//                type: .simple,
-//                items: popularAlbumsItems
-//            ),
-//            Section(
-//                title: "Trending Now",
-//                type: .simple,
-//                items: trendingNowItems
-//            ),
-//            Section(
-//                title: "Discover More",
-//                type: .simple,
-//                items: discoverMoreItems
-//            )
+            Section(
+                title: "New Releases",
+                type: .simple,
+                items: newReleasesItems
+            ),
+            Section(
+                title: "Popular Albums",
+                type: .simple,
+                items: popularAlbumsItems
+            ),
+            Section(
+                title: "Trending Now",
+                type: .simple,
+                items: trendingNowItems
+            ),
+            Section(
+                title: "Discover More",
+                type: .simple,
+                items: discoverMoreItems
+            )
         ]
     }
 }
