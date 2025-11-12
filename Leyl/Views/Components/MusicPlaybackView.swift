@@ -74,9 +74,9 @@ struct MusicPlaybackView: View {
                 Image(audioPlayerManager.currentSong?.image ?? "aqareeb")
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 24, height: 24)
+                    .frame(width: 28, height: 28)
                     .clipShape(RoundedRectangle(cornerRadius: 4))
-                    .padding(.trailing, 15)
+                    .padding(.trailing, 10)
                 
                 VStack(alignment: .leading, spacing: 2) {
 //                    ScrollingText(
@@ -105,7 +105,7 @@ struct MusicPlaybackView: View {
                 .buttonStyle(.plain)
             }
             .padding(.leading, 20)
-            .padding(.trailing, 25)
+            .padding(.trailing, 20)
             .contentShape(Rectangle())
             .onTapGesture {
                 showSongView = true
