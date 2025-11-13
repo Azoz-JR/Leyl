@@ -36,17 +36,19 @@ struct SongView: View {
                     .padding(.top, 30)
                 
                 VStack(spacing: 0) {
-//                    Text(audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b")
-//                    .font(.title2)
-//                    .fontWeight(.bold)
-//                    .foregroundStyle(.white)
-//                    .lineLimit(1)
-//                    .padding(.horizontal, 30)
+                    Text(audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                    .padding(.horizontal, 30)
                     
-                    MarqueeText(text: audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b", font: .systemFont(ofSize: 21, weight: .bold), leftFade: 2, rightFade: 10, startDelay: 2, alignment: .center)
-                        .padding(.horizontal, 30)
-                        .padding(.bottom, 2)
-                        .id(showSongView)
+//                    if showSongView {
+//                        MarqueeText(text: audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b", font: .systemFont(ofSize: 21, weight: .bold), leftFade: 2, rightFade: 10, startDelay: 2, alignment: .center)
+//                            .padding(.horizontal, 30)
+//                            .padding(.bottom, 2)
+//                            .id(showSongView)
+//                    }
                     
                     Text(audioPlayerManager.currentSong?.artist ?? "Wegz")
                     .font(.title3)
@@ -58,6 +60,7 @@ struct SongView: View {
                 SongPlayerView()
                     .padding(.top, 15)
             }
+            
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background {
                 LinearGradient(
@@ -66,12 +69,13 @@ struct SongView: View {
                     endPoint: gradientShift ? .bottomLeading : .bottomTrailing
                 )
             }
+            .clipShape(.rect(cornerRadius: 54))
+            .ignoresSafeArea()
             .animation(.smooth(duration: 0.4), value: audioPlayerManager.isPlaying)
             .animation(Animation.easeInOut(duration: 2.0).repeatForever(autoreverses: true), value: gradientShift)
-            .clipShape(.rect(cornerRadius: showSongView && dragOffset < 50 ? 0 : 16))
-            .ignoresSafeArea()
-            .offset(y: showSongView ? dragOffset : 1000)
-            .animation(.smooth(duration: 0.4), value: showSongView)
+            
+            .offset(y: showSongView ? (dragOffset * 0.8) : 1000)
+            .animation(.spring(response: 0.4, dampingFraction: 0.8, blendDuration: 0.2), value: dragOffset)
             .gesture(
                 DragGesture()
                     .onChanged { value in
@@ -81,18 +85,16 @@ struct SongView: View {
                     }
                     .onEnded { value in
                         if value.translation.height > dismissThreshold {
-                            withAnimation(.smooth(duration: 0.4)) {
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.8, blendDuration: 0.2)) {
                                 showSongView = false
                             }
                         }
-                        withAnimation(.linear(duration: 0.5)) {
-                            dragOffset = 0
-                        }
+                        dragOffset = 0
                     }
             )
             .onAppear {
                 gradientShift = true
-                dismissThreshold = geometry.size.height * 0.4
+                dismissThreshold = geometry.size.height * 0.3
             }
         }
     }

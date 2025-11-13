@@ -44,12 +44,21 @@ struct MainTabView: View {
             .tabViewBottomAccessory {
                 if audioPlayerManager.currentSong != nil && !showSongView {
                     MusicPlaybackView(namespace: animation, showSongView: $showSongView)
-                        .matchedGeometryEffect(id: "songImage", in: animation)
+                        .contentShape(Rectangle()) // Makes the whole area tappable
+                        .onTapGesture {
+                            // This is the animation trigger!
+                            withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) {
+                                showSongView = true
+                            }
+                        }
                 }
             }
             
-            SongView(namespace: animation, showSongView: $showSongView)
-                .zIndex(1)
+//            if showSongView {
+                SongView(namespace: animation, showSongView: $showSongView)
+//                    .transition(.asymmetric(insertion: .identity, removal: .identity))
+                    .zIndex(1)
+//            }
         }
     }
 }

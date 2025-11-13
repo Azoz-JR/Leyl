@@ -75,7 +75,7 @@ final class AudioPlayerManager {
             return
         }
         
-        let song1 = Song(title: "Khesert El Sha3b Afterparty Bad daysssssssss", artist: "Wegz", image: "aqareeb", url: url1, colors: ["#A68563", "#A68563"])
+        let song1 = Song(title: "Khesert El Sha3b", artist: "Wegz", image: "aqareeb", url: url1, colors: ["#A68563", "#A68563"])
         let song2 = Song(title: "Afterparty", artist: "Wegz", image: "aqareeb", url: url2, colors: ["#A68563", "#A68563"])
         let song3 = Song(title: "Leh", artist: "Nasser", image: "leh", url: url3, colors: ["#2C3F43", "#7D8987"])
         let song4 = Song(title: "MEEN FINA", artist: "Nasser", image: "leh", url: url4, colors: ["#2C3F43", "#7D8987"])

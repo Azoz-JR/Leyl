@@ -24,6 +24,7 @@ struct MusicPlaybackView: View {
                     .scaledToFill()
                     .frame(width: 28, height: 28)
                     .clipShape(RoundedRectangle(cornerRadius: 4))
+                    .matchedGeometryEffect(id: "albumArt", in: namespace)
                 
                 VStack(alignment: .leading, spacing: 2) {
 //                    ScrollingText(
@@ -34,11 +35,13 @@ struct MusicPlaybackView: View {
 //                    .frame(height: 16)
                     
                     MarqueeText(text: audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b", font: .systemFont(ofSize: 14, weight: .semibold), leftFade: 2, rightFade: 15, startDelay: 4, alignment: .leading)
+                        .matchedGeometryEffect(id: "title", in: namespace)
                     
                     Text(audioPlayerManager.currentSong?.artist ?? "Artist name")
                         .font(.system(size: 12))
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
+                        .matchedGeometryEffect(id: "artist", in: namespace)
                 }
                 
                 Spacer()
@@ -52,6 +55,7 @@ struct MusicPlaybackView: View {
                             .foregroundStyle(.white)
                     }
                     .buttonStyle(.plain)
+                    .matchedGeometryEffect(id: "playButton", in: namespace)
 
                     Button {
                         audioPlayerManager.nextTrack()
@@ -61,14 +65,15 @@ struct MusicPlaybackView: View {
                             .foregroundStyle(.white)
                     }
                     .buttonStyle(.plain)
+                    .matchedGeometryEffect(id: "forwardButton", in: namespace)
                 }
             }
             .padding(.leading, 20)
             .padding(.trailing, 25)
-            .contentShape(Rectangle())
-            .onTapGesture {
-                showSongView = true
-            }
+//            .contentShape(Rectangle())
+//            .onTapGesture {
+//                showSongView = true
+//            }
         default:
             HStack(spacing: 0) {
                 Image(audioPlayerManager.currentSong?.image ?? "aqareeb")
@@ -77,6 +82,7 @@ struct MusicPlaybackView: View {
                     .frame(width: 28, height: 28)
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .padding(.trailing, 10)
+                    .matchedGeometryEffect(id: "albumArt", in: namespace)
                 
                 VStack(alignment: .leading, spacing: 2) {
 //                    ScrollingText(
@@ -87,11 +93,13 @@ struct MusicPlaybackView: View {
 //                    .frame(height: 16)
                     
                     MarqueeText(text: audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b", font: .systemFont(ofSize: 14, weight: .semibold), leftFade: 2, rightFade: 15, startDelay: 4, alignment: .leading)
+                        .matchedGeometryEffect(id: "title", in: namespace)
                     
                     Text(audioPlayerManager.currentSong?.artist ?? "Artist name")
                         .font(.system(size: 12))
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
+                        .matchedGeometryEffect(id: "artist", in: namespace)
                 }
                 
                 Spacer()
@@ -103,13 +111,14 @@ struct MusicPlaybackView: View {
                         .font(.system(size: 16))
                 }
                 .buttonStyle(.plain)
+                .matchedGeometryEffect(id: "playButton", in: namespace)
             }
             .padding(.leading, 20)
             .padding(.trailing, 20)
-            .contentShape(Rectangle())
-            .onTapGesture {
-                showSongView = true
-            }
+//            .contentShape(Rectangle())
+//            .onTapGesture {
+//                showSongView = true
+//            }
         }
     }
 }
