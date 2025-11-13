@@ -85,7 +85,7 @@ struct SongView: View {
                                 showSongView = false
                             }
                         }
-                        withAnimation(.smooth(duration: 0.3)) {
+                        withAnimation(.linear(duration: 0.5)) {
                             dragOffset = 0
                         }
                     }

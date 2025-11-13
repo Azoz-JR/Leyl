@@ -12,6 +12,9 @@ struct AlbumView: View {
     let album: Album
     @Environment(AudioPlayerManager.self) var audioPlayerManager
     
+    @State private var allowDismissalGesture: AllowedNavigationDismissalGestures = .none
+
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
@@ -95,6 +98,13 @@ struct AlbumView: View {
         }
         .animation(.easeInOut, value: audioPlayerManager.isPlaying)
         .navigationBarTitleDisplayMode(.inline)
+        .navigationAllowDismissalGestures(allowDismissalGesture)
+        .task {
+            Task {
+                try? await Task.sleep(for: .seconds(1))
+                allowDismissalGesture = .all
+            }
+        }
     }
 }
 

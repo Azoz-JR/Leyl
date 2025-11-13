@@ -10,6 +10,8 @@ import SwiftUI
 struct RecentlyPlayedGridView: View {
     
     @Namespace var namespace
+
+    
     let songs: [Song]
     
     let columns = [

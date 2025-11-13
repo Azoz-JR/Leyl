@@ -10,6 +10,7 @@ import SwiftUI
 struct SectionView: View {
     
     @Namespace var namespace
+    @State private var allowDismissalGesture: AllowedNavigationDismissalGestures = .none
     
     let section: Section
     
