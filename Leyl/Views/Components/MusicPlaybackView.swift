@@ -27,15 +27,15 @@ struct MusicPlaybackView: View {
                     .matchedGeometryEffect(id: "albumArt", in: namespace)
                 
                 VStack(alignment: .leading, spacing: 2) {
-//                    ScrollingText(
-//                        text: audioPlayerManager.currentSong?.title ?? "Song name",
-//                        font: .system(size: 14, weight: .semibold),
-//                        availableWidth: 180
-//                    )
-//                    .frame(height: 16)
+                    ScrollingText(
+                        text: audioPlayerManager.currentSong?.title ?? "Song name",
+                        font: .system(size: 14, weight: .semibold),
+                        availableWidth: 180
+                    )
+                    .frame(height: 16)
                     
-                    MarqueeText(text: audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b", font: .systemFont(ofSize: 14, weight: .semibold), leftFade: 2, rightFade: 15, startDelay: 4, alignment: .leading)
-                        .matchedGeometryEffect(id: "title", in: namespace)
+//                    MarqueeText(text: audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b", font: .systemFont(ofSize: 14, weight: .semibold), leftFade: 2, rightFade: 15, startDelay: 4, alignment: .leading)
+//                        .matchedGeometryEffect(id: "title", in: namespace)
                     
                     Text(audioPlayerManager.currentSong?.artist ?? "Artist name")
                         .font(.system(size: 12))
@@ -85,15 +85,15 @@ struct MusicPlaybackView: View {
                     .matchedGeometryEffect(id: "albumArt", in: namespace)
                 
                 VStack(alignment: .leading, spacing: 2) {
-//                    ScrollingText(
-//                        text: audioPlayerManager.currentSong?.title ?? "Song name",
-//                        font: .system(size: 14, weight: .semibold),
-//                        availableWidth: 120
-//                    )
-//                    .frame(height: 16)
+                    ScrollingText(
+                        text: audioPlayerManager.currentSong?.title ?? "Song name",
+                        font: .system(size: 14, weight: .semibold),
+                        availableWidth: 120
+                    )
+                    .frame(height: 16)
                     
-                    MarqueeText(text: audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b", font: .systemFont(ofSize: 14, weight: .semibold), leftFade: 2, rightFade: 15, startDelay: 4, alignment: .leading)
-                        .matchedGeometryEffect(id: "title", in: namespace)
+//                    MarqueeText(text: audioPlayerManager.currentSong?.title ?? "Khesert Elsha3b", font: .systemFont(ofSize: 14, weight: .semibold), leftFade: 2, rightFade: 15, startDelay: 4, alignment: .leading)
+//                        .matchedGeometryEffect(id: "title", in: namespace)
                     
                     Text(audioPlayerManager.currentSong?.artist ?? "Artist name")
                         .font(.system(size: 12))
