@@ -4,7 +4,7 @@
 
 **A pixel-perfect recreation of Apple Music, built to master advanced iOS development**
 
-![iOS](https://img.shields.io/badge/iOS-18.0+-000000?style=flat&logo=ios&logoColor=white)
+![iOS](https://img.shields.io/badge/iOS-26.0+-000000?logoColor=white)
 ![Swift](https://img.shields.io/badge/Swift-6.0-FA7343?style=flat&logo=swift&logoColor=white)
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-blue?style=flat&logo=swift&logoColor=white)
 ![Platform](https://img.shields.io/badge/Platform-iPhone-lightgrey?style=flat)
@@ -19,7 +19,7 @@
 
 ## 📱 About The Project
 
-Leyl (ليل - meaning "night" in Arabic) is a complete recreation of Apple Music's iOS app, built from the ground up using modern SwiftUI and iOS 18 features. This project was created as part of the Apple Developer Academy to explore three specific technical challenges in iOS development.
+Leyl (ليل - meaning "night" in Arabic) is a complete recreation of Apple Music's iOS app, built from the ground up using modern SwiftUI and iOS 26 features. This project was created as part of the Apple Developer Academy to explore three specific technical challenges in iOS development.
 
 ### 🎯 Technical Learning Goals
 
