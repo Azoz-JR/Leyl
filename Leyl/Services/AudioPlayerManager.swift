@@ -413,7 +413,7 @@ final class AudioPlayerManager {
         let now = Date()
         if !force,
            let lastActivityUpdateDate,
-           now.timeIntervalSince(lastActivityUpdateDate) < 0.5 {
+           now.timeIntervalSince(lastActivityUpdateDate) < 1.0 {
             return
         }
         

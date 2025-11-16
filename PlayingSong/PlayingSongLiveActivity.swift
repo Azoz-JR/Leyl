@@ -73,7 +73,11 @@ struct PlayingSongLiveActivity: Widget {
                     .symbolEffect(.bounce, options: .repeat(.continuous), isActive: true)
                     .foregroundStyle(.brown)
             } minimal: {
-                Text(context.state.emoji)
+                Image(context.state.image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 24, height: 24)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)

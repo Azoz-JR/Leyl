@@ -69,13 +69,12 @@ struct SongView: View {
                     endPoint: gradientShift ? .bottomLeading : .bottomTrailing
                 )
             }
-            .clipShape(.rect(cornerRadius: 54))
+            .clipShape(.rect(topLeadingCorner: Edge.Corner.Style(integerLiteral: dragOffset > 0 ? 54 : 0), topTrailingCorner: Edge.Corner.Style(integerLiteral: dragOffset > 0 ? 54 : 0), bottomLeadingCorner: 0, bottomTrailingCorner: 0))
             .ignoresSafeArea()
             .animation(.smooth(duration: 0.4), value: audioPlayerManager.isPlaying)
             .animation(Animation.easeInOut(duration: 2.0).repeatForever(autoreverses: true), value: gradientShift)
-            
-            .offset(y: showSongView ? (dragOffset * 0.8) : 1000)
             .animation(.spring(response: 0.4, dampingFraction: 0.8, blendDuration: 0.2), value: dragOffset)
+            .offset(y: showSongView ? (dragOffset * 0.8) : 1000)
             .gesture(
                 DragGesture()
                     .onChanged { value in

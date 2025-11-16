@@ -10,6 +10,7 @@ import SwiftUI
 struct SongPlayerView: View {
     
     @Environment(AudioPlayerManager.self) var audioPlayerManager
+    @State private var isScrubbing: Bool = false
     
     var body: some View {
         @Bindable var playerManager = audioPlayerManager
@@ -19,13 +20,14 @@ struct SongPlayerView: View {
                 value: $playerManager.currentSongTime,
                 in: 0...audioPlayerManager.currentSongDuration
             ) { editing in
+                isScrubbing = editing
                 if editing {
                     audioPlayerManager.beginScrubbing()
                 } else {
                     audioPlayerManager.completeScrubbing(at: playerManager.currentSongTime)
                 }
             }
-            .tint(.white.opacity(0.5))
+            .tint(audioPlayerManager.isEditing ? .white : .white.opacity(0.5))
             .sliderThumbVisibility(.hidden)
             
             HStack {
@@ -36,12 +38,12 @@ struct SongPlayerView: View {
             .font(.caption)
             .foregroundColor(.secondary)
             
-            HStack(spacing: 40) {
+            HStack(spacing: 60) {
                 Button {
                     audioPlayerManager.previousTrack()
                 } label: {
                     Image(systemName: "backward.fill")
-                        .font(.largeTitle)
+                        .font(.system(size: 28, weight: .bold))
                         .foregroundStyle(.white)
                 }
                 
@@ -49,7 +51,7 @@ struct SongPlayerView: View {
                     audioPlayerManager.playPause()
                 } label: {
                     Image(systemName: audioPlayerManager.isPlaying ? "pause.fill" : "play.fill")
-                        .font(.largeTitle)
+                        .font(.system(size: 38, weight: .bold))
                         .foregroundStyle(.white)
                 }
                 .frame(width: 50, height: 50)
@@ -58,7 +60,7 @@ struct SongPlayerView: View {
                     audioPlayerManager.nextTrack()
                 } label: {
                     Image(systemName: "forward.fill")
-                        .font(.largeTitle)
+                        .font(.system(size: 28, weight: .bold))
                         .foregroundStyle(.white)
                 }
             }
@@ -81,7 +83,8 @@ struct SongPlayerView: View {
            .padding(.top, 50)
         }
         .padding(.horizontal, 30)
-        .animation(.default, value: audioPlayerManager.isPlaying)
+        .animation(.easeInOut, value: audioPlayerManager.isPlaying)
+        .animation(.bouncy(duration: 0.3), value: isScrubbing)
     }
     
     func formatTime(_ time: Double) -> String {
