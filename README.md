@@ -68,11 +68,11 @@ This project focuses on mastering three core areas:
 
 | Home Screen | Album View | Now Playing |
 |:---:|:---:|:---:|
-| *Browse your music library* | *View album details* | *Full playback controls* |
+| ![Home](.github/images/home-screen.PNG) | ![Album](.github/images/album-view.PNG) | ![Now Playing](.github/images/now-playing.PNG) |
 
 | Mini Player | Dynamic Island | Lock Screen |
 |:---:|:---:|:---:|
-| *Quick access player* | *Live Activity* | *Control anywhere* |
+| ![Mini Player](.github/images/mini-player.PNG) | ![Dynamic Island](.github/images/dynamic-island.PNG) | ![Lock Screen](.github/images/lock-screen.PNG) |
 
 </div>
 
