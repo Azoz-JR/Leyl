@@ -678,9 +678,9 @@ This project is created for educational purposes as part of the Apple Developer 
 
 ## 📞 Contact & Links
 
-- **GitHub**: [Your GitHub Profile]
-- **LinkedIn**: [Your LinkedIn Profile]
-- **Email**: [Your Email]
+- **GitHub**: https://github.com/Azoz-JR
+- **LinkedIn**: https://github.com/Azoz-JR
+- **Email**: azozsalah19@gmail.com
 
 ---
 
