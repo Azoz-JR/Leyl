@@ -1,3 +1,9 @@
+
+
+
+https://github.com/user-attachments/assets/f21a1e0e-26b3-4bb5-a2b5-90488d3b1fcb
+
+
 # 🎵 Leyl - Apple Music Recreation
 
 <div align="center">
@@ -50,7 +56,10 @@ This project focuses on mastering three core areas:
 ## 🎬 Demo
 
 ### App Flow
-> *Watch the complete user experience from browsing to playback*
+
+<p align="center">
+    ![App Flow Demo](https://github.com/user-attachments/assets/f21a1e0e-26b3-4bb5-a2b5-90488d3b1fcb)
+</p>
 
 **Key Interactions Demonstrated:**
 - Browse albums with smooth scrolling
