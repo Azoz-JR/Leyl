@@ -1,9 +1,3 @@
-
-
-
-https://github.com/user-attachments/assets/f21a1e0e-26b3-4bb5-a2b5-90488d3b1fcb
-
-
 # 🎵 Leyl - Apple Music Recreation
 
 <div align="center">
@@ -57,9 +51,16 @@ This project focuses on mastering three core areas:
 
 ### App Flow
 
-<p align="center">
-    ![App Flow Demo](https://github.com/user-attachments/assets/f21a1e0e-26b3-4bb5-a2b5-90488d3b1fcb)
-</p>
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/ad66893a-33af-4460-961c-21a078e41ee6" 
+         controls 
+         autoplay 
+         muted 
+         loop
+         style="max-width: 100%; border-radius: 12px;">
+  </video>
+</div>
+
 
 **Key Interactions Demonstrated:**
 - Browse albums with smooth scrolling
@@ -287,8 +288,8 @@ Allows fine-grained control over navigation gestures per view.
 ## 🚀 Installation
 
 ### Prerequisites
-- **Xcode 15.0+**
-- **iOS 18.0+** (for Dynamic Island features)
+- **Xcode 26.0+**
+- **iOS 26.0+** (for Dynamic Island features)
 - **macOS Sonoma** or later
 - **iPhone 15 Pro** or later (for Dynamic Island testing)
 
@@ -296,7 +297,7 @@ Allows fine-grained control over navigation gestures per view.
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/leyl.git
+git clone https://github.com/Azoz-JR/leyl.git
 cd leyl
 ```
 
@@ -319,7 +320,6 @@ open Leyl.xcodeproj
 5. **Build and Run**
 - Select iPhone 15 Pro simulator or device
 - Press `Cmd + R` to build and run
-- For Dynamic Island: use physical iPhone 15 Pro/Max or iPhone 16 Pro/Max
 
 ### Targets
 The project includes two targets:
